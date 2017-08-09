@@ -2,9 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ng table</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <title>ng select, ng options, ng repeat</title>
 </head>
 <body>
 
+    <div ng-app="myApp" ng-controller="myCtrl">
+
+        <h1> Use ng repeat to repeat</h1>
+        <select>
+            <option ng-repeat="x in names">{{x}}</option>
+        </select>
+
+        <h1>Use ng option to repeat</h1>
+        <select ng-model="selectedName" ng-options="x for x in names">
+        </select>
+    </div>
+
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope) {
+            $scope.names = ["Emil", "Tobias", "Linus"];
+        });
+    </script>
 </body>
 </html>

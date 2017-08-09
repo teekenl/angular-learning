@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <title>ng-event</title>
+</head>
+<body>
+    <div ng-app="myApp" ng-controller="myCtrl">
+
+        <h1 ng-mousemove="plus = plus + 1 ">Move over me to add one !</h1>
+
+        <h2>{{ plus }}</h2>
+
+        <input ng-copy="count = count + 1" value="Copy this text" />
+        <h2>{{count}}</h2>
+    </div>
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope) {
+            $scope.plus = 0;
+            $scope.count = 0;
+        });
+    </script>
+</body>
+</html>

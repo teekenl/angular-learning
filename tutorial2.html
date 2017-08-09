@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <title>ng-model & ng-click</title>
+</head>
+<body>
+    <div ng-app="myApp" ng-controller="myCtrl">
+        <form name="myForm">
+            Name: <input ng-model="name"><br/>
+            Email: <input type="email" name="myAddress" ng-model="text"><br/>
+            <span ng-show="myForm.myAddress.$error.email">Not a valid email</span>
+            <button ng-click="changeName()">
+                Click it
+            </button>
+        </form>
+        <h1>You entered: {{name}}</h1>
+    </div>
+
+    <script>
+        var app = angular.module("myApp",[]);
+        app.controller("myCtrl",function($scope){
+            $scope.name = 'John Doe';
+            $scope.changeName = function(){
+                $scope.name = "haha"
+            }
+        });
+    </script>
+</body>
+</html>

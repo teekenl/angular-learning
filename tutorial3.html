@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <title>ng-filter</title>
+</head>
+<body>
+    <div id="app" ng-app="myApp" ng-controller="personCtrl">
+        <p>The name is {{ lastName | uppercase}}</p>
+    </div>
+
+    <div id="app2" ng-app="myapp2" ng-controller="namesCtrl2">
+
+        <p>Looping with objects:</p>
+        <h2>List orderby country in ascending order</h2>
+        <ul>
+            <li ng-repeat="x in names | orderBy: 'country' ">
+                {{ x.name + ', ' + x.country }}
+            </li>
+        </ul>
+        <h2>List filtered which names contain i character </h2>
+        <ul>
+            <li ng-repeat="x in names | filter : 'i'">
+                {{ x }}
+            </li>
+        </ul>
+
+        <h2>Ajax filter based on the word or query entered. </h2>
+        <p><input type="text" ng-model="test"></p>
+
+        <ul>
+            <li ng-repeat="x in names | filter : test">
+                {{ x.name + ', ' + x.country }}
+            </li>
+        </ul>
+
+        <h2>The list is filtered based on the type of button clicked </h2>
+        <table border="1" width="100%">
+            <tr>
+                <th ng-click="orderByMe('name')">Name</th>
+                <th ng-click="orderByMe('country')">Country</th>
+            </tr>
+            <tr ng-repeat="x in names | orderBy:myOrderBy">
+                <td>{{x.name}}</td>
+                <td>{{x.country}}</td>
+            </tr>
+        </table>
+
+        <h2>Custom filter</h2>
+        <ul>
+            <li ng-repeat="x in names2">
+                {{x | myFormat }}
+            </li>
+        </ul>
+
+        <h1>Price: {{ price | currency }}</h1>
+
+    </div>
+
+    <script>
+        var app = angular.module('myApp',[]).controller('personCtrl',function($scope){
+            $scope.firstName = 'John';
+            $scope.lastName =  'Doe';
+        });
+
+        var app2 = angular.module('myapp2', []);
+
+        app2.filter('myFormat', function() {
+            return function(x) {
+                var i, c, txt = "";
+                for (i = 0; i < x.length; i++) {
+                    c = x[i];
+                    if (i % 2 === 0) {
+                        c = c.toUpperCase();
+                    }
+                    txt += c;
+                }
+                return txt;
+            };
+        });
+
+        app2.controller('namesCtrl2', function($scope) {
+            $scope.names = [
+                {name:'Jani',country:'Norway'},
+                {name:'Carl',country:'Sweden'},
+                {name:'Margareth',country:'England'},
+                {name:'Hege',country:'Norway'},
+                {name:'Joe',country:'Denmark'},
+                {name:'Gustav',country:'Sweden'},
+                {name:'Birgit',country:'Denmark'},
+                {name:'Mary',country:'England'},
+                {name:'Kai',country:'Norway'}
+            ];
+
+            $scope.names2 = ['Jani', 'Carl', 'Margareth', 'Hege', 'Joe', 'Gustav', 'Birgit', 'Mary', 'Kai'];
+            $scope.price = 58;
+
+            $scope.orderByMe = function(x) {
+                $scope.myOrderBy = x;
+            }
+        });
+
+        // This line of code must be added if you used more than ng-app on the same HTML page.
+        angular.bootstrap(document.getElementById("app2"), ['myapp2']);
+
+    </script>
+</body>
+</html>

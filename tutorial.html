@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <title>Learn ng-app,ng-controller,ng-directive (Multiple tag)</title>
+</head>
+<body>
+    <div id="App1" ng-app="myApp" ng-controller="myCtrl">
+        {{firstName +  " " + lastName}}
+    </div>
+
+    <div id="app2" ng-app="myapp2" ng-controller="myCtrl2" ng-init="names=[
+        {name:'Jani',country:'Norway'},
+        {name:'Hege',country:'Sweden'},
+        {name:'Kai',country:'Denmark'}]">
+        <ul>
+            <li ng-repeat="x in names">
+                {{ x.name + ', ' + x.country }}
+            </li>
+        </ul>
+    </div>
+
+
+    <script>
+        var app = angular.module("myApp",[]);
+        app.controller("myCtrl", function($scope) {
+            $scope.firstName = "John";
+            $scope.lastName= "Doe";
+        });
+
+        // Second ng-app
+        var app2 = angular.module("myapp2",[]);
+        app2.controller("myCtrl2",function($scope){
+        });
+
+        // This line of code must be added if you used more than ng-app on the same HTML page.
+        angular.bootstrap(document.getElementById("app2"), ['myapp2']);
+
+    </script>
+
+</body>
+</html>

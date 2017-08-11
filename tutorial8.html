@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+    <title>ng-routing</title>
+</head>
+<body ng-app="myApp">
+
+    <p><a href="#/!">Main</a></p>
+
+    <a href="#!tutorial">Red</a>
+    <a href="#!tutorial2">Green</a>
+    <a href="#!tutorial3">Blue</a>
+
+    <div ng-view></div>
+
+    <script>
+        var app = angular.module("myApp", ["ngRoute"]);
+        app.config(function($routeProvider) {
+            $routeProvider
+                .when("/", {
+                    templateUrl : "tutorial.html"
+                })
+                .when("/tutorial", {
+                    templateUrl : "tutorial2.html"
+                })
+                .when("/tutorial2", {
+                    templateUrl : "tutorial3.html"
+                })
+                .when("/tutorial3", {
+                    templateUrl : "tutorial4.html"
+                });
+        });
+    </script>
+</body>
+</html>

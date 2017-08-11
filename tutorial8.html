@@ -10,8 +10,8 @@
 
     <p><a href="#/!">Main</a></p>
 
-    <a href="#!tutorial">Red</a>
-    <a href="#!tutorial2">Green</a>
+    <a href="#/!tutorial">Red</a>
+    <a href="#/!tutorial2">Green</a>
     <a href="#!tutorial3">Blue</a>
 
     <div ng-view></div>
@@ -24,13 +24,13 @@
                     templateUrl : "tutorial.html"
                 })
                 .when("/tutorial", {
-                    templateUrl : "tutorial2.html"
+                    templateUrl : "tutorial.html"
                 })
                 .when("/tutorial2", {
-                    templateUrl : "tutorial3.html"
+                    templateUrl : "tutorial2.html"
                 })
-                .when("/tutorial3", {
-                    templateUrl : "tutorial4.html"
+                .when("/tutorial4", {
+                    templateUrl : "tutorial3.html"
                 });
         });
     </script>

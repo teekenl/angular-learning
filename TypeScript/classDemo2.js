@@ -11,8 +11,23 @@ var __extends = (this && this.__extends) || (function () {
 var People = (function () {
     function People(name, age) {
         this.name = name;
-        this.age = age;
+        this._age = age;
     }
+    Object.defineProperty(People.prototype, "age", {
+        get: function () {
+            return this._age;
+        },
+        set: function (newage) {
+            if (newage > 200 || newage < 0) {
+                alert('Please enter a valid age');
+            }
+            else {
+                this._age = newage;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     People.prototype.print = function () {
         return this.name + ":" + this.age;
     };

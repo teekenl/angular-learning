@@ -1,11 +1,23 @@
 
 class People{
     name:string;
-    age:number;
+    private _age:number;
 
     constructor(name:string, age:number) {
         this.name = name;
-        this.age = age;
+        this._age = age;
+    }
+
+    get age():number {
+        return this._age;
+    }
+
+    set age(newage:number){
+        if(newage > 200 || newage < 0) {
+            alert('Please enter a valid age');
+        } else {
+            this._age = newage;
+        }
     }
 
     print() {
